@@ -1,7 +1,8 @@
 using UnityEngine;
 
-interface IGravityEmitter
+public interface IGravityEmitter
 {
+    void AddToManager() { GravityManager.Instance.GravityEmitters.Add(this); }
     bool PointInRange(Vector3 point);
     bool ColliderInRange(Collider collider);
     bool ColliderIntersectsRange(Collider collider);
