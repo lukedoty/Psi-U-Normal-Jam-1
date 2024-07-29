@@ -5,16 +5,13 @@ public class ColliderGravityEmitter : MonoBehaviour, IGravityEmitter
 {
     private Collider m_collider;
 
-    [SerializeField]
-    private float m_force = 9.81f;
+    [SerializeField] private float m_force = 9.81f;
     public float Force { get { return m_force; } set { m_force = value; } }
 
-    [SerializeField]
-    private Vector3 m_direction;
+    [SerializeField] private Vector3 m_direction;
     public Vector3 Direction { get { return m_direction; } set { m_direction = value; } }
 
-    [SerializeField]
-    private bool m_alwaysShowGizmos;
+    [SerializeField] private bool m_alwaysShowGizmos;
     
     private void Awake()
     {
@@ -26,9 +23,9 @@ public class ColliderGravityEmitter : MonoBehaviour, IGravityEmitter
         ((IGravityEmitter)this).AddToManager();
     }
 
-    public bool PointInRange(Vector3 point)
+    public bool IsPointInRange(Vector3 point)
     {
-        Collider[] overlaps = Physics.OverlapSphere(point, 0, 1 << 6);
+        Collider[] overlaps = Physics.OverlapSphere(point, 0);
 
         foreach (Collider c in overlaps)
         {
