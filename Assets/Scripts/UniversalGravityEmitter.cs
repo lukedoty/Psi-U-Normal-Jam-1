@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class UniversalGravityEmitter : MonoBehaviour, IGravityEmitter
 {
-    private Transform m_tf;
     [SerializeField]
-    private float m_gravity = 9.81f;
+    private float m_force = 9.81f;
+    public float Force { get { return m_force; } set { m_force = value; } }
 
-    private void Awake()
-    {
-        m_tf = GetComponent<Transform>();
-    }
+    [SerializeField]
+    private Vector3 m_direction;
+    public Vector3 Direction { get { return m_direction; } set { m_direction = value; } }
 
     private void Start()
     {
@@ -19,17 +18,15 @@ public class UniversalGravityEmitter : MonoBehaviour, IGravityEmitter
     }
 
     public bool PointInRange(Vector3 point) { return true; }
-    public bool ColliderInRange(Collider collider) { return true; }
-    public bool ColliderIntersectsRange(Collider collider) { return true; }
 
     public Vector3 GetGravity(Vector3 point)
     {
-        return m_tf.rotation * (m_gravity * Vector3.down);
+        return Quaternion.Euler(m_direction) * (m_force * Vector3.down);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.rotation * (m_gravity * Vector3.down));
+        Gizmos.DrawRay(transform.position, GetGravity(transform.position));
     }
 }
