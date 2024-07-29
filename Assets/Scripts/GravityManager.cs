@@ -5,6 +5,7 @@ public class GravityManager : MonoBehaviour
 {
     private static GravityManager s_instance;
     public static GravityManager Instance { get { return s_instance; } }
+
     private List<IGravityEmitter> m_gravityEmitters;
     public List<IGravityEmitter> GravityEmitters { get { return m_gravityEmitters; } }
 
@@ -21,4 +22,5 @@ public class GravityManager : MonoBehaviour
 
         m_gravityEmitters = new List<IGravityEmitter>();
     }
+
 }
